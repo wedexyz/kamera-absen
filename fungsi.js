@@ -272,7 +272,7 @@ function readOutLoud(message) {
         text= "mouse";
         }
         else {
-        text="null"
+        text="tidak dikenali"
         }
         document.getElementById("output").value=text;
 
@@ -288,6 +288,10 @@ function readOutLoud(message) {
     case "mouse":
     addData_Proses();
     break;
+    case "tidak dikenali":
+    addData_Proses();
+    break;
+		    
   }
 
 
