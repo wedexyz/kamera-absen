@@ -272,7 +272,7 @@ function readOutLoud(message) {
         text= "mouse";
         }
         else {
-        text="tidak dikenali"
+        text="tidak dikenali";
         }
         document.getElementById("output").value=text;
 
