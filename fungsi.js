@@ -288,7 +288,7 @@ function readOutLoud(message) {
     case "mouse":
     addData_Proses();
     break;
-    case "tidak dikenali":
+    case "tidak dikenali";
     addData_Proses();
     break;
 		    
