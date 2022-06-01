@@ -1,8 +1,5 @@
 
-   
-   
-   
-   var camStreamWidth = 640;
+    var camStreamWidth = 640;
     var camStreamHeight = 480;
 
     var VIEW_WIDTH = 320;

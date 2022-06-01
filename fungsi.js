@@ -1,16 +1,11 @@
 
 
 var firebaseConfig = {
-
     databaseURL: "https://absensi2020face.firebaseio.com/",
- 
-	};
-    firebase.initializeApp(firebaseConfig);
+	  };
+firebase.initializeApp(firebaseConfig);
    
-
-
-    function tampilData()
-	{
+function tampilData(){
 	// Buat referensi database firebase---------------------
 		var dbRef = firebase.database();
 		var statusAlat = dbRef.ref("status-alat");
@@ -41,21 +36,7 @@ var firebaseConfig = {
     var n = d.toLocaleDateString();
     var a = d.toLocaleTimeString();
     document.getElementById("t4_tanggal_alat_add").value=n+" "+a;
-/*
-    function ambilDataTerakhir()
-    {
 
-      var dbRef_ambilDataTerakhir = firebase.database();
-      var cariAkhir = dbRef_ambilDataTerakhir.ref("status-alat");
-      cariAkhir.limitToLast(1).on('child_added', function(dataAkhir) {
-      var snap = dataAkhir.val();
-     var id_record_terakhir = snap.id;
-      document.getElementById("T4_add").value = id_record_terakhir+1;
-      });
-  
-      }
-       setTimeout(function(){ recognition.start(); }, 5000);  
-  */
       function addData_Proses()
       {
       //  var id_add_proses = $('#T4_add').val();
@@ -132,7 +113,8 @@ recognition.onresult = function(event) {
   var transcript = event.results[current][0].transcript;
   var mobileRepeatBug = (current == 1 && transcript == event.results[0][0].transcript);
   if(!mobileRepeatBug) {
-    noteContent += transcript;
+    //noteContent += transcript;
+    noteContent = transcript;
     noteTextarea.val(noteContent);
   }
  
@@ -146,7 +128,7 @@ recognition.onresult = function(event) {
   else{
   salah();
   setTimeout(function(){  location.replace("index.html"); }, 10000);  
-  text=" ";
+ 
   }
  
 };
@@ -172,8 +154,10 @@ recognition.onerror = function(event) {
 
 $('#start-record-btn').on('click', function(e) {
   if (noteContent.length) {
-    noteContent += ' ';
+    //noteContent += ' ';
+    
   }
+  noteContent = ' ';
   recognition.start();
 });
 $('#pause-record-btn').on('click', function(e) {
@@ -201,11 +185,20 @@ function readOutLoud(message) {
 
 }
 
+//loop 2 detik
+setInterval(function() {
+  recognition.start();
 
-    const URL = "https://teachablemachine.withgoogle.com/models/Op2KTK74/";
-    let model, webcam, labelContainer, maxPredictions;
+}, 3000);
+//loop 1 
+setInterval(function() {
+document.getElementById("note-textarea").value = '';
+}, 3000);
 
-    async function init() {
+const URL = "https://teachablemachine.withgoogle.com/models/Op2KTK74/";
+let model, webcam, labelContainer, maxPredictions;
+
+async function init() {
         const modelURL = URL + "model.json";
         const metadataURL = URL + "metadata.json";
 
@@ -219,7 +212,7 @@ function readOutLoud(message) {
         
 
         window.requestAnimationFrame(loop);
-       document.getElementById("webcam-container").appendChild(webcam.canvas);
+        document.getElementById("webcam-container").appendChild(webcam.canvas);
         labelContainer = document.getElementById("label-container");
        
         
@@ -272,7 +265,7 @@ function readOutLoud(message) {
         text= "mouse";
         }
         else {
-        text="tidak dikenali";
+        text="unknown"
         }
         document.getElementById("output").value=text;
 
@@ -288,10 +281,9 @@ function readOutLoud(message) {
     case "mouse":
     addData_Proses();
     break;
-    case "tidak dikenali":
+    case "unknown":
     addData_Proses();
     break;
-		    
   }
 
 
@@ -374,7 +366,7 @@ function readOutLoud(message) {
         ctx.font = "italic small-caps bold 20px arial";
         for (var i = 0; i < detectedFaces.length; i++) {
             var face = detectedFaces[i];
-           var t=document.getElementById('output').value;
+            var t=document.getElementById('output').value;
   
          // console.log(face.faceId);
          kirimdata();
